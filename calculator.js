@@ -35,23 +35,35 @@ function fillDisplay(){
 }
 
 function calculate(){
-    let firstNum, secondNum;
+    let firstNum = null;
+    let secondNum = null;
     let oper;
 
     fillDisplay();
 
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
+            let tempNum = parseInt(display.textContent);
+            if (firstNum !== null) {
+                secondNum = tempNum;
+                firstNum = operate(operators[oper], firstNum, secondNum);
+                secondNum = null;
+            }
+            else {
+                firstNum = tempNum;
+            }
             oper = button.textContent;
-            firstNum = parseInt(display.textContent);
             display.textContent = "";
-        })
-    );
+        }));
 
     equalBtn.addEventListener('click', () => {
         secondNum = parseInt(display.textContent);
         let res = operate(operators[oper], firstNum, secondNum);
         display.textContent = res;
+        console.log("res", res);
+        firstNum = null;
+        secondNum = null;
+        display.textContent = "";
     })
 }
 
