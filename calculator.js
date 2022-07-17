@@ -25,21 +25,22 @@ function operate(operator, n1, n2){
     return operator(n1, n2);
 }
 
-function fillDisplay(){
-    Array.from(digitsBtns).forEach((button) =>
-        button.addEventListener('click', () => {
-            const num = button.textContent;
-            console.log(num);
-            display.textContent += num;
-        }));
-}
-
 function calculate(){
     let firstNum = null;
     let secondNum = null;
     let oper;
+    let resShown = false;
 
-    fillDisplay();
+    Array.from(digitsBtns).forEach((button) =>
+    button.addEventListener('click', () => {
+        console.log(resShown);
+        if (resShown) {
+            display.textContent = "";
+            resShown = false;
+        }
+        const num = button.textContent;
+        display.textContent += num;
+    }));
 
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
@@ -54,6 +55,8 @@ function calculate(){
             }
             oper = button.textContent;
             display.textContent = "";
+            console.log("firstNum", firstNum);
+            console.log("secondNum", secondNum);
         }));
 
     equalBtn.addEventListener('click', () => {
@@ -63,7 +66,7 @@ function calculate(){
         console.log("res", res);
         firstNum = null;
         secondNum = null;
-        display.textContent = "";
+        resShown = true;
     })
 }
 
