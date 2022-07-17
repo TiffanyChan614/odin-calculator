@@ -28,7 +28,7 @@ function operate(operator, n1, n2){
 function calculate(){
     let firstNum = null;
     let secondNum = null;
-    let oper;
+    let oper = null;
     let resShown = false;
 
     Array.from(digitsBtns).forEach((button) =>
@@ -60,13 +60,21 @@ function calculate(){
         }));
 
     equalBtn.addEventListener('click', () => {
-        secondNum = parseInt(display.textContent);
-        let res = operate(operators[oper], firstNum, secondNum);
-        display.textContent = res;
-        console.log("res", res);
-        firstNum = null;
-        secondNum = null;
-        resShown = true;
+        if (display.textContent){
+            secondNum = parseInt(display.textContent);
+            console.log("second num!", secondNum);
+        }
+        if (firstNum !== null &&
+                secondNum !== null &&
+                oper !== null){
+            let res = operate(operators[oper], firstNum, secondNum);
+            display.textContent = res;
+            console.log("res", res);
+            firstNum = null;
+            secondNum = null;
+            oper = null;
+            resShown = true;
+        }
     })
 }
 
