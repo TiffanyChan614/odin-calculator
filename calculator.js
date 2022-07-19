@@ -6,19 +6,20 @@ const clearBtn = document.querySelector(".clear");
 
 var operators = {
     "Add": function(n1, n2){
-    return n1 + n2;
+        return n1 + n2;
     },
 
     "Subtract": function(n1, n2){
-    return n1 - n2;
+        return n1 - n2;
     },
 
     "Multiply": function(n1, n2){
-    return n1 * n2;
+        return n1 * n2;
     },
 
     "Divide": function(n1, n2){
-    return n1 / n2;
+        if (n2 === 0) return "ERROR";
+        return n1 / n2;
     }
 };
 
@@ -71,7 +72,11 @@ function calculate(){
                 secondNum !== null &&
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
-            display.textContent = res.toFixed(8);
+            if (typeof res === "number")
+                display.textContent = res.toFixed(8);
+            else{
+                display.textContent = res;
+            }
             console.log("res", res);
             firstNum = null;
             secondNum = null;
