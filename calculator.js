@@ -4,6 +4,7 @@ const operBtns = document.querySelectorAll(".operators");
 const equalBtn = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
 const dotBtn = document.querySelector(".dot");
+const bsBtn = document.querySelector(".bs");
 
 var operators = {
     "Add": function(n1, n2){
@@ -101,6 +102,11 @@ function calculate(){
             display.textContent += ".";
             dotPressed = true;
         }
+    })
+
+    bsBtn.addEventListener('click', () => {
+        let oldContent = display.textContent;
+        display.textContent = oldContent.slice(0, oldContent.length-1);
     })
 }
 
