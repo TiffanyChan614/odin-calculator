@@ -2,6 +2,7 @@ const display = document.querySelector(".display");
 const digitsBtns = document.querySelectorAll(".digits");
 const operBtns = document.querySelectorAll(".operators");
 const equalBtn = document.querySelector(".equal");
+const clearBtn = document.querySelector(".clear");
 
 var operators = {
     "Add": function(n1, n2){
@@ -62,19 +63,26 @@ function calculate(){
     equalBtn.addEventListener('click', () => {
         if (display.textContent){
             secondNum = parseInt(display.textContent);
-            console.log("second num!", secondNum);
         }
         if (firstNum !== null &&
                 secondNum !== null &&
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
-            display.textContent = res;
+            display.textContent = res.toFixed(8);
             console.log("res", res);
             firstNum = null;
             secondNum = null;
             oper = null;
             resShown = true;
         }
+    })
+
+    clearBtn.addEventListener('click', () => {
+        display.textContent = "";
+        firstNum = null;
+        secondNum = null;
+        oper = null;
+        resShown = false;
     })
 }
 
