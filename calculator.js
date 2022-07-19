@@ -3,6 +3,7 @@ const digitsBtns = document.querySelectorAll(".digits");
 const operBtns = document.querySelectorAll(".operators");
 const equalBtn = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
+const dotBtn = document.querySelector(".dot");
 
 var operators = {
     "Add": function(n1, n2){
@@ -32,6 +33,7 @@ function calculate(){
     let secondNum = null;
     let oper = null;
     let resShown = false;
+    let dotPressed = false;
 
     Array.from(digitsBtns).forEach((button) =>
     button.addEventListener('click', () => {
@@ -46,7 +48,7 @@ function calculate(){
 
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
-            let tempNum = parseInt(display.textContent);
+            let tempNum = parseFloat(display.textContent);
             console.log("tempNum", tempNum);
             if (!isNaN(tempNum)){
                 if (firstNum !== null) {
@@ -59,6 +61,7 @@ function calculate(){
                 }
                 oper = button.textContent;
                 display.textContent = "";
+                dotPressed = false;
                 console.log("firstNum", firstNum);
                 console.log("secondNum", secondNum);
             }
@@ -66,15 +69,14 @@ function calculate(){
 
     equalBtn.addEventListener('click', () => {
         if (display.textContent){
-            secondNum = parseInt(display.textContent);
+            secondNum = parseFloat(display.textContent);
+            dotPressed = false;
         }
         if (firstNum !== null &&
                 secondNum !== null &&
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
-            if (typeof res === "number"){
-                if (Number.isInteger(res)) display.textContent = res;
-                else display.textContent = res.toFixed(8);
+            display.textContent = +res.toFixed(8);
             }
             else{
                 display.textContent = res;
@@ -84,8 +86,7 @@ function calculate(){
             secondNum = null;
             oper = null;
             resShown = true;
-        }
-    })
+        });
 
     clearBtn.addEventListener('click', () => {
         display.textContent = "";
@@ -93,6 +94,13 @@ function calculate(){
         secondNum = null;
         oper = null;
         resShown = false;
+    })
+
+    dotBtn.addEventListener('click', () => {
+        if (!dotPressed){
+            display.textContent += ".";
+            dotPressed = true;
+        }
     })
 }
 
