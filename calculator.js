@@ -74,22 +74,22 @@ function calculate(){
             secondNum = parseFloat(display.textContent);
             dotPressed = false;
         }
+
         if (firstNum !== null &&
                 secondNum !== null &&
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
-            display.textContent = +res.toFixed(8);
-            }
-            else{
+            if (typeof res === "number")
+                display.textContent = +res.toFixed(8);
+            else
                 display.textContent = res;
-            }
             console.log("res", res);
             firstNum = null;
             secondNum = null;
             oper = null;
             resShown = true;
         }
-    );
+    });
 
     clearBtn.addEventListener('click', () => {
         display.textContent = "";
