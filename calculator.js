@@ -42,7 +42,7 @@ function calculate(){
 
     Array.from(digitsBtns).forEach((button) =>
     button.addEventListener('click', () => {
-        console.log(resShown);
+        // console.log(resShown);
         if (resShown) {
             displayVar.textContent = "";
             resShown = false;
@@ -54,7 +54,7 @@ function calculate(){
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
             let tempNum = parseFloat(displayVar.textContent);
-            console.log("tempNum", tempNum);
+            // console.log("tempNum", tempNum);
             if (!isNaN(tempNum)){
                 if (firstNum !== null) {
                     secondNum = tempNum;
@@ -67,8 +67,8 @@ function calculate(){
                 oper = button.textContent;
                 displayVar.textContent = "";
                 dotPressed = false;
-                console.log("firstNum", firstNum);
-                console.log("secondNum", secondNum);
+                // console.log("firstNum", firstNum);
+                // console.log("secondNum", secondNum);
             }
             else if(oper) oper = button.textContent;
         }));
@@ -87,7 +87,7 @@ function calculate(){
                 displayVar.textContent = +res.toFixed(8);
             else
                 displayVar.textContent = res;
-            console.log("res", res);
+            // console.log("res", res);
             firstNum = null;
             secondNum = null;
             oper = null;
