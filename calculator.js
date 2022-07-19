@@ -66,6 +66,7 @@ function calculate(){
                 console.log("firstNum", firstNum);
                 console.log("secondNum", secondNum);
             }
+            else if(oper) oper = button.textContent;
         }));
 
     equalBtn.addEventListener('click', () => {
