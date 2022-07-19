@@ -87,7 +87,8 @@ function calculate(){
             secondNum = null;
             oper = null;
             resShown = true;
-        });
+        }
+    );
 
     clearBtn.addEventListener('click', () => {
         display.textContent = "";
@@ -95,19 +96,19 @@ function calculate(){
         secondNum = null;
         oper = null;
         resShown = false;
-    })
+    });
 
     dotBtn.addEventListener('click', () => {
         if (!dotPressed){
             display.textContent += ".";
             dotPressed = true;
         }
-    })
+    });
 
     bsBtn.addEventListener('click', () => {
         let oldContent = display.textContent;
         display.textContent = oldContent.slice(0, oldContent.length-1);
-    })
+    });
 }
 
 calculate();
