@@ -22,6 +22,10 @@ var operators = {
     "/": function(n1, n2){
         if (n2 === 0) return "ERROR";
         return n1 / n2;
+    },
+
+    "%": function(n1, n2){
+        return n1 % n2;
     }
 };
 
