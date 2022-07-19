@@ -7,19 +7,19 @@ const dotBtn = document.querySelector(".dot");
 const bsBtn = document.querySelector(".bs");
 
 var operators = {
-    "Add": function(n1, n2){
+    "+": function(n1, n2){
         return n1 + n2;
     },
 
-    "Subtract": function(n1, n2){
+    "-": function(n1, n2){
         return n1 - n2;
     },
 
-    "Multiply": function(n1, n2){
+    "*": function(n1, n2){
         return n1 * n2;
     },
 
-    "Divide": function(n1, n2){
+    "/": function(n1, n2){
         if (n2 === 0) return "ERROR";
         return n1 / n2;
     }
