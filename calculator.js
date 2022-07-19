@@ -72,8 +72,10 @@ function calculate(){
                 secondNum !== null &&
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
-            if (typeof res === "number")
-                display.textContent = res.toFixed(8);
+            if (typeof res === "number"){
+                if (Number.isInteger(res)) display.textContent = res;
+                else display.textContent = res.toFixed(8);
+            }
             else{
                 display.textContent = res;
             }
