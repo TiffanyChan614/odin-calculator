@@ -46,18 +46,21 @@ function calculate(){
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
             let tempNum = parseInt(display.textContent);
-            if (firstNum !== null) {
-                secondNum = tempNum;
-                firstNum = operate(operators[oper], firstNum, secondNum);
-                secondNum = null;
+            console.log("tempNum", tempNum);
+            if (!isNaN(tempNum)){
+                if (firstNum !== null) {
+                    secondNum = tempNum;
+                    firstNum = operate(operators[oper], firstNum, secondNum);
+                    secondNum = null;
+                }
+                else {
+                    firstNum = tempNum;
+                }
+                oper = button.textContent;
+                display.textContent = "";
+                console.log("firstNum", firstNum);
+                console.log("secondNum", secondNum);
             }
-            else {
-                firstNum = tempNum;
-            }
-            oper = button.textContent;
-            display.textContent = "";
-            console.log("firstNum", firstNum);
-            console.log("secondNum", secondNum);
         }));
 
     equalBtn.addEventListener('click', () => {
