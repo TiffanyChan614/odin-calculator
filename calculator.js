@@ -1,4 +1,4 @@
-const display = document.querySelector(".display");
+const displayVar = document.querySelector(".display-content");
 const digitsBtns = document.querySelectorAll(".digits");
 const operBtns = document.querySelectorAll(".operators");
 const equalBtn = document.querySelector(".equal");
@@ -44,16 +44,16 @@ function calculate(){
     button.addEventListener('click', () => {
         console.log(resShown);
         if (resShown) {
-            display.textContent = "";
+            displayVar.textContent = "";
             resShown = false;
         }
         const num = button.textContent;
-        display.textContent += num;
+        displayVar.textContent += num;
     }));
 
     Array.from(operBtns).forEach((button) =>
         button.addEventListener('click', () => {
-            let tempNum = parseFloat(display.textContent);
+            let tempNum = parseFloat(displayVar.textContent);
             console.log("tempNum", tempNum);
             if (!isNaN(tempNum)){
                 if (firstNum !== null) {
@@ -65,7 +65,7 @@ function calculate(){
                     firstNum = tempNum;
                 }
                 oper = button.textContent;
-                display.textContent = "";
+                displayVar.textContent = "";
                 dotPressed = false;
                 console.log("firstNum", firstNum);
                 console.log("secondNum", secondNum);
@@ -74,8 +74,8 @@ function calculate(){
         }));
 
     equalBtn.addEventListener('click', () => {
-        if (display.textContent){
-            secondNum = parseFloat(display.textContent);
+        if (displayVar.textContent){
+            secondNum = parseFloat(displayVar.textContent);
             dotPressed = false;
         }
 
@@ -84,9 +84,9 @@ function calculate(){
                 oper !== null){
             let res = operate(operators[oper], firstNum, secondNum);
             if (typeof res === "number")
-                display.textContent = +res.toFixed(8);
+                displayVar.textContent = +res.toFixed(8);
             else
-                display.textContent = res;
+                displayVar.textContent = res;
             console.log("res", res);
             firstNum = null;
             secondNum = null;
@@ -96,7 +96,7 @@ function calculate(){
     });
 
     clearBtn.addEventListener('click', () => {
-        display.textContent = "";
+        displayVar.textContent = "";
         firstNum = null;
         secondNum = null;
         oper = null;
@@ -105,14 +105,14 @@ function calculate(){
 
     dotBtn.addEventListener('click', () => {
         if (!dotPressed){
-            display.textContent += ".";
+            displayVar.textContent += ".";
             dotPressed = true;
         }
     });
 
     bsBtn.addEventListener('click', () => {
-        let oldContent = display.textContent;
-        display.textContent = oldContent.slice(0, oldContent.length-1);
+        let oldContent = displayVar.textContent;
+        displayVar.textContent = oldContent.slice(0, oldContent.length-1);
     });
 }
 
