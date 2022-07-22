@@ -101,17 +101,17 @@ button{
     background-color: #fbbc33;
 }
 
-.digits:hover, .dot:hover{
+.digits:hover, .dot:hover, .digits.pressed, dot.pressed{
     background-color: #147a73;
     transition: background-color 0.15s ease-out;
 }
 
-.operators:hover{
+.operators:hover, .operators.pressed{
     background-color: #33555d;
     transition: background-color 0.15s ease-out;
 }
 
-.clear:hover, .bs:hover, .equal:hover{
+.functions:hover, .functions.pressed{
     background-color: #c2890f;
     transition: background-color 0.15s ease-out;
 }
