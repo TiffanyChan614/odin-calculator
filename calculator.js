@@ -5,6 +5,12 @@ const equalBtn = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
 const dotBtn = document.querySelector(".dot");
 const bsBtn = document.querySelector(".bs");
+const numsKey = "0123456789";
+const opersKey = "+-*/%";
+const dotKey = ".";
+const equalKey = "Enter";
+const bsKey = "Backspace";
+const acKey = "Escape";
 
 var operators = {
     "+": function(n1, n2){
@@ -40,40 +46,36 @@ function calculate(){
     let resShown = false;
     let dotPressed = false;
 
-    Array.from(digitsBtns).forEach((button) =>
-    button.addEventListener('click', () => {
-        // console.log(resShown);
+    function enterDigit(num){
         if (resShown) {
             displayVar.textContent = "";
             resShown = false;
         }
-        const num = button.textContent;
         displayVar.textContent += num;
-    }));
+    }
 
-    Array.from(operBtns).forEach((button) =>
-        button.addEventListener('click', () => {
-            let tempNum = parseFloat(displayVar.textContent);
-            // console.log("tempNum", tempNum);
-            if (!isNaN(tempNum)){
-                if (firstNum !== null) {
-                    secondNum = tempNum;
-                    firstNum = operate(operators[oper], firstNum, secondNum);
-                    secondNum = null;
-                }
-                else {
-                    firstNum = tempNum;
-                }
-                oper = button.textContent;
-                displayVar.textContent = "";
-                dotPressed = false;
-                // console.log("firstNum", firstNum);
-                // console.log("secondNum", secondNum);
+    function enterOper(op){
+        let tempNum = parseFloat(displayVar.textContent);
+        // console.log("tempNum", tempNum);
+        if (!isNaN(tempNum)){
+            if (firstNum !== null) {
+                secondNum = tempNum;
+                firstNum = operate(operators[oper], firstNum, secondNum);
+                secondNum = null;
             }
-            else if(oper) oper = button.textContent;
-        }));
+            else {
+                firstNum = tempNum;
+            }
+            oper = op;
+            displayVar.textContent = "";
+            dotPressed = false;
+            // console.log("firstNum", firstNum);
+            // console.log("secondNum", secondNum);
+        }
+        else if(oper) oper = op;
+    }
 
-    equalBtn.addEventListener('click', () => {
+    function enterEqual(){
         if (displayVar.textContent){
             secondNum = parseFloat(displayVar.textContent);
             dotPressed = false;
@@ -89,34 +91,62 @@ function calculate(){
                 }
                 else displayVar.textContent = res.toString();
             }
-            else
-                displayVar.textContent = res;
+            else displayVar.textContent = res;
             // console.log("res", res);
             firstNum = null;
             secondNum = null;
             oper = null;
             resShown = true;
         }
-    });
+    }
 
-    clearBtn.addEventListener('click', () => {
+    function enterClear(){
         displayVar.textContent = "";
         firstNum = null;
         secondNum = null;
         oper = null;
         resShown = false;
-    });
+    }
 
-    dotBtn.addEventListener('click', () => {
+    function enterDot(){
         if (!dotPressed){
             displayVar.textContent += ".";
             dotPressed = true;
         }
-    });
+    }
 
-    bsBtn.addEventListener('click', () => {
+    function enterBs(){
         let oldContent = displayVar.textContent;
         displayVar.textContent = oldContent.slice(0, oldContent.length-1);
+    }
+
+    Array.from(digitsBtns).forEach((button) =>
+    button.addEventListener('click', () => {
+        const num = button.textContent;
+        enterDigit(num);
+    }));
+
+    Array.from(operBtns).forEach((button) =>
+        button.addEventListener('click', () => {
+            oper = button.textContent;
+            enterOper(oper);
+        }));
+
+    equalBtn.addEventListener('click', () => enterEqual());
+
+    clearBtn.addEventListener('click', () => enterClear());
+
+    dotBtn.addEventListener('click', () => enterDot());
+
+    bsBtn.addEventListener('click', () => enterBs());
+
+    document.addEventListener('keydown', (e) => {
+        if (numsKey.includes(e.key)) enterDigit(e.key);
+        else if(opersKey.includes(e.key)) enterOper(e.key);
+        else if(e.key === equalKey) enterEqual();
+        else if(e.key === acKey) enterClear();
+        else if(e.key === dotKey) enterDot();
+        else if(e.key === bsKey) enterBs();
     });
 }
 
