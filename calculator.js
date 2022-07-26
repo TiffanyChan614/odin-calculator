@@ -74,7 +74,8 @@ function calculate() {
             displayVar.textContent = "";
             resShown = false;
         }
-        displayVar.textContent += num;
+        if (displayVar.textContent.length < 11)
+            displayVar.textContent += num;
     }
 
     function enterOper(op){
