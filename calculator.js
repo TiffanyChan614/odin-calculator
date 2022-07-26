@@ -107,7 +107,7 @@ function calculate() {
                 oper !== null) {
             let res = operate(operators[oper], firstNum, secondNum);
             if (typeof res === "number"){
-                if (parseFloat(res).toString().length > 11) {
+                if (parseFloat(res).toString().length > 10) {
                     displayVar.textContent = res.toString().slice(0, 11);
                 }
                 else displayVar.textContent = res.toString();
